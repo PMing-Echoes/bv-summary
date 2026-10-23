@@ -9,7 +9,7 @@
         → UTF-8 .txt
 ```
 
-支持 yt-dlp 能解析的站点，例如 **Bilibili、YouTube**，以及其他 yt-dlp 支持的平台。下载使用维护活跃的 `yt-dlp`，不使用已停止维护的 `youtube-dl`。
+支持 yt-dlp 能解析的站点，例如 **Bilibili、YouTube** 。
 
 ---
 
