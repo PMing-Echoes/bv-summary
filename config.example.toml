@@ -1,0 +1,54 @@
+# Copy to config.toml (ignored by git) or pass with --config.
+# Precedence: CLI flag > environment variable > this file > built-in default.
+# API keys can live here, but environment variables are safer. Never commit keys.
+
+output = "./outputs"
+keep_audio = false
+save_raw = false
+force = false
+
+[download]
+cookies = ""
+# Examples: "chrome", "edge", "firefox:default-release".
+# yt-dlp's BROWSER[+KEYRING][:PROFILE][::CONTAINER] syntax is not interpreted here;
+# use cookies.txt / YTDLP_COOKIES if you need that full syntax.
+cookies_from_browser = ""
+ffmpeg_location = ""
+
+[asr]
+# auto | faster-whisper | openai
+backend = "auto"
+# faster-whisper model size/name, or a local model directory.
+model = "small"
+# auto | cpu | cuda
+device = "auto"
+# auto | int8 | int8_float16 | float16 | float32
+compute_type = "auto"
+# "auto" enables language detection; otherwise an ISO code such as "zh" or "en".
+language = "auto"
+# model_dir = "D:/models/whisper"
+cpu_threads = 0
+beam_size = 5
+
+# OpenAI-compatible transcription API (used explicitly or as auto fallback).
+api_base_url = ""
+api_key = ""
+api_model = "whisper-1"
+# Audio larger than ~24 MB is split into <= chunk_seconds pieces:
+chunk_seconds = 600
+timeout = 600
+
+[llm]
+# auto | openai | ollama | none
+backend = "auto"
+# Required for a remote OpenAI-compatible backend. On auto, OLLAMA_MODEL or
+# this model is used for a local Ollama fallback.
+model = ""
+base_url = ""
+api_key = ""
+temperature = 0.1
+chunk_chars = 3000
+timeout = 120
+# prompt_file = "./prompts/correct.txt"
+ollama_base_url = "http://127.0.0.1:11434/v1"
+ollama_model = ""

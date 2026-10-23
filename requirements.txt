@@ -1,0 +1,13 @@
+# Run pip from this directory: the editable "." below refers to the project.
+# Recommended installation: CLI + local faster-whisper support.
+# Models are downloaded separately on first use; this does not install a model.
+-e .[local-asr]
+
+# Minimal installation without the local ASR engine:
+#   pip install -e .
+#
+# Windows NVIDIA GPU runtime DLLs are opt-in (about 1.3 GB download):
+#   pip install -e ".[gpu]"
+#
+# Development / tests:
+#   pip install -e ".[dev,local-asr,gpu]"

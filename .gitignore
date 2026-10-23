@@ -1,0 +1,24 @@
+# Environments / tooling
+.venv/
+.tmp/
+.tmp-run/
+.cache/
+.cuda/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Local secrets and configuration
+.env
+config.toml
+
+# Generated artifacts
+outputs/
+*.part
+*.ytdl
+
+# Files created by a local permission-recovery run on this machine.
+.acl-recovery/

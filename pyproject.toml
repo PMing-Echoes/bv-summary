@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bv-summary"
+version = "0.1.0"
+description = "Video link -> audio extraction -> ASR -> LLM correction, as a modular CLI."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "bv-summary contributors" }]
+keywords = ["asr", "whisper", "yt-dlp", "transcription", "llm", "cli"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: End Users/Desktop",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Multimedia :: Sound/Audio :: Speech",
+  "Topic :: Text Processing",
+]
+dependencies = [
+  "yt-dlp>=2025.1.15",
+  "openai>=1.60,<4",
+  "httpx>=0.27,<1",
+  "rich>=13.9,<15",
+  "python-dotenv>=1.0,<2",
+  "imageio-ffmpeg>=0.5,<1",
+]
+
+[project.optional-dependencies]
+# Recommended local ASR backend. Install the package, not a model: the model is
+# downloaded on first use (or read from ASR_MODEL_DIR / a local model path).
+local-asr = ["faster-whisper>=1.1.1,<2"]
+# Windows GPU runtime DLLs for CTranslate2 (CUDA 12 + cuDNN 9). These are
+# large, opt-in wheels; the app registers their bin directories automatically.
+gpu = [
+  "nvidia-cublas-cu12>=12.4,<13; sys_platform == 'win32'",
+  "nvidia-cuda-nvrtc-cu12>=12.4,<13; sys_platform == 'win32'",
+  "nvidia-cuda-runtime-cu12>=12.4,<13; sys_platform == 'win32'",
+  "nvidia-cudnn-cu12>=9,<10; sys_platform == 'win32'",
+]
+dev = ["pytest>=8,<10", "ruff>=0.9"]
+
+[project.scripts]
+bv-summary = "bv_summary.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "UP", "B"]
